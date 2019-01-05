@@ -1,0 +1,40 @@
+<div class="form-group">
+  <form #qGen="ngForm">
+    <div class="form-group">
+    <table cslass="table table-bordered">
+      <tr *ngFor="let queryObj of objArray; let i= index">
+        <td>
+          <tr *ngFor="let entry of conditionOptions" name='conditions{{i}}' [ngModelOptions]="{standalone: true}" [(ngModel)] = 'queryObj.condition' ngDefaultControl>
+            <td>{{ entry }}</td>
+            <td>
+              <input type="radio" name='conditions{{i}}' [value]='entry'>
+            </td>
+          </tr>
+          <tr>
+             <td >
+               <div>Field:</div>
+                <select class="form-control drop"  id="field" [(ngModel)] = 'queryObj.field' [ngModelOptions]="{standalone: true}" name='field' >
+                    <option *ngFor="let fel of fieldOptions" name='field' [value]="fel">{{fel}}</option>
+                </select>
+              </td>
+              <td>
+                <div>Condition:</div>
+                <select class="form-control drop" id="operation"  [(ngModel)] = 'queryObj.operation' [ngModelOptions]="{standalone: true}"  name='operation' style="width: 100%;">
+                    <option *ngFor="let op of operationOptions" name='operation' [value]="op">{{op}}</option>
+                  </select>
+              </td>
+              <td>
+                <div>Value:</div>
+                <input type="text" [(ngModel)] = 'queryObj.value' [ngModelOptions]="{standalone: true}" >  
+              </td>
+          </tr> 
+        </td>
+      </tr>
+      <tr>
+          <input type="submit" value="submit" (click)="show(objArray)">
+          <button name="addControl" (click)="AddControl()">Add</button>
+        </tr>
+    </table>
+  </div>
+  </form>
+</div>
